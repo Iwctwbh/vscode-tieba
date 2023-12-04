@@ -8,6 +8,7 @@ vscode 贴吧插件, 目前是只读贴吧，不支持评论和发帖。
 
 - 一键设置 cookie
 - 添加、删除想看的吧
+- 设置字体颜色
 - 浏览并刷新帖子列表
 - 查看帖子及评论
 - 快速打开浏览器查看帖子
@@ -20,4 +21,4 @@ vscode 贴吧插件, 目前是只读贴吧，不支持评论和发帖。
 
 ## issue
 
-https://github.com/Jiny3213/vscode-tieba/issues
+https://github.com/Iwctwbh/vscode-tieba/issues
