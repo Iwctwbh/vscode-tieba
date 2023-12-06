@@ -3,7 +3,7 @@ import * as cheerio from "cheerio";
 import * as fs from "fs";
 import * as vscode from "vscode";
 import {saveText} from "../utils/test";
-import {getStoreFontColor} from "./axios";
+import {getStoreFontColor, getStoreFontSize} from "./axios";
 
 interface ThreadItem {
   title: string; // 帖子的标题
@@ -159,6 +159,10 @@ export function getPostList(
 // 获取字体颜色
 export async function getFontColor() {
   return getStoreFontColor();
+}
+
+export async function getFontSize() {
+  return getStoreFontSize();
 }
 
 // 评论信息

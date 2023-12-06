@@ -2,7 +2,7 @@
 import * as vscode from "vscode";
 import {openPostView} from "./command/openPostView";
 import {ThreadProvider, ThreadNode} from "./provider/ThreadProvider";
-import {setCookie, setFontColor} from "./api/axios";
+import {setCookie, setFontColor, setFontSize} from "./api/axios";
 
 export function activate(context: vscode.ExtensionContext) {
   console.log("tieba is now active!");
@@ -22,6 +22,10 @@ export function activate(context: vscode.ExtensionContext) {
   // fontColor 持久化
   let fontColor: string = context.globalState.get("fontColor") || "";
   setFontColor(fontColor, context); // 首次加载state中的fontColor，传入context
+
+  // fontSize 持久化
+  let fontSize: string = context.globalState.get("fontSize") || "";
+  setFontSize(fontSize, context); // 首次加载state中的fontSize，传入context
 
   // 注册「打开 webview」命令
   context.subscriptions.push(openPostView(context));
@@ -181,6 +185,25 @@ export function activate(context: vscode.ExtensionContext) {
           setFontColor(fontColor!);
           vscode.window.showInformationMessage("设置color成功");
           console.log("your color:", fontColor);
+        }
+      });
+  });
+
+  // 修改字体大小
+  vscode.commands.registerCommand("tieba.fontSize", (node: ThreadNode) => {
+    vscode.window
+      .showInputBox({
+        placeHolder: "输入字体大小(13px)",
+      })
+      .then((fontSize) => {
+        if (
+          (fontSize && fontSize.match(new RegExp(/\d{1,2}px/g))?.length) ??
+          0 > 0
+        ) {
+          setFontSize(fontSize!);
+
+          vscode.window.showInformationMessage("设置size成功");
+          console.log("your size:", fontSize);
         }
       });
   });

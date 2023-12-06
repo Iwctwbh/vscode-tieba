@@ -8,11 +8,17 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 - 查看首页推荐
 
+## [0.1.4] - 2023-12-06
+
+### Added
+
+- 支持修改字体大小
+
 ## [0.1.3] - 2023-12-04
 
 ### Added
 
-- 支持修改颜色
+- 支持修改字体颜色
 - 修复通过搜索点开的帖子，初始页码和跳转页码无效的问题
 
 ## [0.1.2] - 2023-8-17

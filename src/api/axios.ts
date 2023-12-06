@@ -5,6 +5,7 @@ import {saveObj} from "../utils/test";
 let store = {
   context: null as vscode.ExtensionContext | null,
   fontColor: null as vscode.ExtensionContext | null,
+  fontSize: null as vscode.ExtensionContext | null,
 };
 
 console.log("windowState", vscode.window.state);
@@ -81,6 +82,19 @@ export function setFontColor(
   }
 }
 
+export function setFontSize(
+  fontSize: string,
+  context?: vscode.ExtensionContext
+) {
+  if (context) {
+    // 首次传入context
+    store.fontSize = context;
+  } else {
+    // fontSize
+    store.fontSize && store.fontSize.globalState.update("fontSize", fontSize);
+  }
+}
+
 export function getStoreFontColor() {
   console.log("getStoreFontColor", store.fontColor);
   console.log(
@@ -88,6 +102,12 @@ export function getStoreFontColor() {
     store.fontColor?.globalState.get("fontColor")
   );
   return store.fontColor && store.fontColor.globalState.get("fontColor");
+}
+
+export function getStoreFontSize() {
+  console.log("getStoreFontSize", store.fontSize);
+  console.log("getStoreFontSize", store.fontSize?.globalState.get("fontSize"));
+  return store.fontSize && store.fontSize.globalState.get("fontSize");
 }
 
 // string => obj
