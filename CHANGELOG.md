@@ -8,6 +8,12 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 - 查看首页推荐
 
+## [0.1.5] - 2023-12-07
+
+### Added
+
+- 支持修改图片透明度
+
 ## [0.1.4] - 2023-12-06
 
 ### Added
