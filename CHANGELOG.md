@@ -8,7 +8,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 - 查看首页推荐
 
-## [0.1.5] - 2023-12-07
+## [0.1.5 - 0.1.6] - 2023-12-07
 
 ### Added
 
