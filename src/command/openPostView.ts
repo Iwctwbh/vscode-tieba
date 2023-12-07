@@ -1,6 +1,11 @@
 import * as vscode from "vscode";
 import {getWebViewContent, MethodHandler} from "../utils/commandUtils";
-import {getFontColor, getPostList, getFontSize} from "../api/index";
+import {
+  getFontColor,
+  getPostList,
+  getFontSize,
+  getImgOpacity,
+} from "../api/index";
 
 export function openPostView(context: vscode.ExtensionContext) {
   // 注册「打开页面」命令，将会在其他地方调用这个命令
@@ -36,6 +41,9 @@ export function openPostView(context: vscode.ExtensionContext) {
         },
         getFontSize() {
           return getFontSize();
+        },
+        getImgOpacity() {
+          return getImgOpacity();
         },
       };
 

@@ -23,6 +23,7 @@
             v-for="(src, index) in item.imageList"
             :key="index"
             :src="src"
+            :style="{'opacity': imgOpacity}"
           />
         </div>
         <div v-if="item.commentList && item.commentList.length">
@@ -83,6 +84,7 @@
         totalPost: 0,
         fontColor: "#d4d4d4",
         fontSize: "13px",
+        imgOpacity: "0.3",
       };
     },
     methods: {
@@ -96,6 +98,10 @@
         callVscode("getFontSize").then((res) => {
           console.log(`fontSize: ${res}`);
           this.fontSize = res;
+        });
+        callVscode("getImgOpacity").then((res) => {
+          console.log(`imgOpacity: ${res}`);
+          this.imgOpacity = res;
         });
         return callVscode("getPostList", {page: this.page, init}).then(
           (res) => {

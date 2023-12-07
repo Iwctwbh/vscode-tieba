@@ -2,7 +2,12 @@
 import * as vscode from "vscode";
 import {openPostView} from "./command/openPostView";
 import {ThreadProvider, ThreadNode} from "./provider/ThreadProvider";
-import {setCookie, setFontColor, setFontSize} from "./api/axios";
+import {
+  setCookie,
+  setFontColor,
+  setFontSize,
+  setImgOpacity,
+} from "./api/axios";
 
 export function activate(context: vscode.ExtensionContext) {
   console.log("tieba is now active!");
@@ -26,6 +31,10 @@ export function activate(context: vscode.ExtensionContext) {
   // fontSize 持久化
   let fontSize: string = context.globalState.get("fontSize") || "";
   setFontSize(fontSize, context); // 首次加载state中的fontSize，传入context
+
+  // imgOpacity 持久化
+  let imgOpacity: string = context.globalState.get("imgOpacity") || "";
+  setImgOpacity(imgOpacity, context); // 首次加载state中的imgOpacity，传入context
 
   // 注册「打开 webview」命令
   context.subscriptions.push(openPostView(context));
@@ -183,8 +192,12 @@ export function activate(context: vscode.ExtensionContext) {
           0 > 0
         ) {
           setFontColor(fontColor!);
-          vscode.window.showInformationMessage("设置color成功");
-          console.log("your color:", fontColor);
+          vscode.window.showInformationMessage("设置字体颜色成功");
+          console.log("your font color:", fontColor);
+        } else {
+          vscode.window.showInformationMessage(
+            "设置字体颜色失败，格式不正确，如：#d4d4d4"
+          );
         }
       });
   });
@@ -202,8 +215,36 @@ export function activate(context: vscode.ExtensionContext) {
         ) {
           setFontSize(fontSize!);
 
-          vscode.window.showInformationMessage("设置size成功");
-          console.log("your size:", fontSize);
+          vscode.window.showInformationMessage("设置字体大小成功");
+          console.log("your font size:", fontSize);
+        } else {
+          vscode.window.showInformationMessage(
+            "设置字体大小失败，格式不正确，如：13px"
+          );
+        }
+      });
+  });
+
+  // 修改图片透明度
+  vscode.commands.registerCommand("tieba.imgOpacity", (node: ThreadNode) => {
+    vscode.window
+      .showInputBox({
+        placeHolder: "输入图片透明度(0.3)",
+      })
+      .then((imgOpacity) => {
+        if (
+          (imgOpacity &&
+            imgOpacity.match(new RegExp(/(1\.0)|(0\.\d)/))?.length) ??
+          0 > 0
+        ) {
+          setImgOpacity(imgOpacity!);
+
+          vscode.window.showInformationMessage("设置图片透明度成功");
+          console.log("your img opacity:", imgOpacity);
+        } else {
+          vscode.window.showInformationMessage(
+            "设置图片透明度失败，格式不正确，如：0.3"
+          );
         }
       });
   });

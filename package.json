@@ -11,7 +11,7 @@
   "keywords": [
     "tieba"
   ],
-  "version": "0.1.5",
+  "version": "0.1.4",
   "engines": {
     "vscode": "^1.50.0"
   },
@@ -61,6 +61,11 @@
         "command": "tieba.fontSize",
         "title": "设置字体大小",
         "icon": "img/link.svg"
+      },
+      {
+        "command": "tieba.imgOpacity",
+        "title": "设置图片透明度",
+        "icon": "img/link.svg"
       }
     ],
     "keybindings": [],
@@ -84,6 +89,11 @@
         },
         {
           "command": "tieba.fontSize",
+          "when": "view == tieba-index",
+          "group": "inline"
+        },
+        {
+          "command": "tieba.imgOpacity",
           "when": "view == tieba-index",
           "group": "inline"
         }

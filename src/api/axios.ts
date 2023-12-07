@@ -6,6 +6,7 @@ let store = {
   context: null as vscode.ExtensionContext | null,
   fontColor: null as vscode.ExtensionContext | null,
   fontSize: null as vscode.ExtensionContext | null,
+  imgOpacity: null as vscode.ExtensionContext | null,
 };
 
 console.log("windowState", vscode.window.state);
@@ -95,6 +96,20 @@ export function setFontSize(
   }
 }
 
+export function setImgOpacity(
+  imgOpacity: string,
+  context?: vscode.ExtensionContext
+) {
+  if (context) {
+    // 首次传入context
+    store.imgOpacity = context;
+  } else {
+    // imgOpacity
+    store.imgOpacity &&
+    store.imgOpacity.globalState.update("imgOpacity", imgOpacity);
+  }
+}
+
 export function getStoreFontColor() {
   console.log("getStoreFontColor", store.fontColor);
   console.log(
@@ -108,6 +123,15 @@ export function getStoreFontSize() {
   console.log("getStoreFontSize", store.fontSize);
   console.log("getStoreFontSize", store.fontSize?.globalState.get("fontSize"));
   return store.fontSize && store.fontSize.globalState.get("fontSize");
+}
+
+export function getStoreImgOpacity() {
+  console.log("getStoreImgOpacity", store.imgOpacity);
+  console.log(
+    "getStoreImgOpacity",
+    store.imgOpacity?.globalState.get("imgOpacity")
+  );
+  return store.imgOpacity && store.imgOpacity.globalState.get("imgOpacity");
 }
 
 // string => obj

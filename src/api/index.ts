@@ -3,7 +3,11 @@ import * as cheerio from "cheerio";
 import * as fs from "fs";
 import * as vscode from "vscode";
 import {saveText} from "../utils/test";
-import {getStoreFontColor, getStoreFontSize} from "./axios";
+import {
+  getStoreFontColor,
+  getStoreFontSize,
+  getStoreImgOpacity,
+} from "./axios";
 
 interface ThreadItem {
   title: string; // 帖子的标题
@@ -161,8 +165,14 @@ export async function getFontColor() {
   return getStoreFontColor();
 }
 
+// 获取字体大小
 export async function getFontSize() {
   return getStoreFontSize();
+}
+
+// 获取图片透明度
+export async function getImgOpacity() {
+  return getStoreImgOpacity();
 }
 
 // 评论信息
