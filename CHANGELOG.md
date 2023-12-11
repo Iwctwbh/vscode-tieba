@@ -12,7 +12,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ### Added
 
-- 支持属地、楼层、时间的显示（评论占不支持）
+- 支持属地、楼层、时间的显示（评论暂不支持）
 
 ## [0.1.5 - 0.1.6] - 2023-12-07
 
