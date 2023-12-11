@@ -26,6 +26,9 @@
             :style="{'opacity': imgOpacity}"
           />
         </div>
+        <div style="text-align: right">
+          {{ item.ip }} {{ item.floor }} {{ item.time }}
+        </div>
         <div v-if="item.commentList && item.commentList.length">
           <div>评论:</div>
           <div

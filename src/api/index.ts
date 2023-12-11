@@ -58,9 +58,12 @@ export function getThreadList(
 export interface PostItem {
   text: string; // 文字内容
   author: string; // 作者
-  pid: string; // postid, 用于对应评论
+  pid: number; // postid, 用于对应评论
   imageList: string[]; // 图片列表
   commentList?: any[]; // 评论
+  ip?: string; // IP属地
+  floor?: string; // 楼层
+  time?: string; // 时间
 }
 
 // 获取一个帖子的内容
@@ -117,9 +120,16 @@ export function getPostList(
           forumId = JSON.parse($(item).attr("data-field")!).content.forum_id;
         }
 
-        let author = $(item).find(".d_name a").text();
-        let text = $(item).find(".d_post_content").text().trim();
-        let pid = $(item).attr("data-pid")!;
+        let author: string = $(item).find(".d_name a").text();
+        let text: string = $(item).find(".d_post_content").text().trim();
+        let pid: number = Number($(item).attr("data-pid")!);
+        let post_tail_wrap: string = $(item).find(".post-tail-wrap").toString();
+        let post_tail_wrap_result = post_tail_wrap.match(
+          /<span>(IP属地:.*?)<\/span>.*?<span class="tail-info">(\d+楼)<\/span>.*?<span class="tail-info">((((\d{4}[\/\-]?\d{1,2}[\/\-]?\d{1,2})|(\d{1,2}[\/\-]\d{1,2}[\/\-]\d{4})|(\d{4}))[T ])?\d{1,2}\:\d{1,2}(:\d{1,2}(\.\d{1,3})?)?( ?[AP]M)?)<\/span>/
+        );
+        let ip = post_tail_wrap_result ? post_tail_wrap_result[1] : "";
+        let floor = post_tail_wrap_result ? post_tail_wrap_result[2] : "";
+        let time = post_tail_wrap_result ? post_tail_wrap_result[3] : "";
         let imageList: string[] = [];
         const images = $(item).find(".d_post_content img");
         if (images.length) {
@@ -132,9 +142,12 @@ export function getPostList(
           author,
           imageList,
           pid,
+          ip,
+          floor,
+          time,
         });
       });
-
+      console.log(postList, "postList");
       console.log("postlist 处理完毕, 开始获取comment");
       // https://tieba.baidu.com/p/8313773571?pid=147133552225&cid=0#147133552225(搜索时的url)
       const tid = url.match(/p\/(\d*)/)![1];
